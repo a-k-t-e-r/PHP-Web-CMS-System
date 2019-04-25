@@ -1,58 +1,45 @@
 <?php include("includes/header.php"); ?>
+<div id="wrapper">
+    <!-- Navigation -->
+    <?php include("includes/navigation.php"); ?>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <!-- Page Heading -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">
+                        Welcome To Admin
+                        <small><?php echo $_SESSION['username']; ?></small>
+                    </h1>
+                    <?php
+                    // Displaying pages based on condition
+                    if (isset($_GET['source'])) {
+                            $source = $_GET['source'];
+                        } else {
+                            $source = "";
+                        }
 
-    <div id="wrapper">
+                    switch ($source) {
+                        case 'add_post':
+                            include("includes/add_post.php");
+                            break;
 
-        <!-- Navigation -->
-        <?php include("includes/navigation.php"); ?>
+                        case 'edit_post':
+                            include("includes/edit_post.php");
+                            break;
 
-        <div id="page-wrapper">
-
-            <div class="container-fluid">
-
-                <!-- Page Heading -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h1 class="page-header">
-                            Welcome To Admin
-                            <small><?php echo $_SESSION['username']; ?></small>
-                        </h1>
-                        <?php
-                            // Displaying pages based on condition
-                            if (isset($_GET['source'])) 
-                            {
-                                $source = $_GET['source'];
-                            }
-                            else
-                            {
-                                $source = "";
-                            }
-
-                            switch ($source) {
-                                case 'add_post':
-                                    include("includes/add_post.php");
-                                    break;
-                                
-                                case 'edit_post':
-                                    include("includes/edit_post.php");
-                                    break;
-                                
-                                default:
-                                    include("includes/view_all_comments.php");
-                                    break;
-                            }
-
-                        ?>
-                    </div>
+                        default:
+                            include("includes/view_all_comments.php");
+                            break;
+                    }
+                    ?>
                 </div>
-                <!-- /.row -->
-
             </div>
-            <!-- /.container-fluid -->
-
+            <!-- /.row -->
         </div>
-        <!-- /#page-wrapper -->
-
+        <!-- /.container-fluid -->
     </div>
-    <!-- /#wrapper -->
-
+    <!-- /#page-wrapper -->
+</div>
+<!-- /#wrapper -->
 <?php include("includes/footer.php"); ?>
